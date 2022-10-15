@@ -251,19 +251,11 @@ router.get(`/threads/create`, isLoggedIn, (req, res) =>{
 // TRYING TO SEND LIEKD MOVIED ID's TO CURRENT SESSION UESER likedMovie ARRAY
     router.post(`/like/:id`, isLoggedIn, (req, res, next) => {
 
-       
-
-
-
       let movieId = req.params.id
-
-  
-
       
     // CAN ADJUST THIS LATER> THIS IS JUST FOR LIKES. DOESN"T MATTER THAT MUCH IN OUR CASE.  
         User.findByIdAndUpdate(req.session.currentUser._id, {
-            
-            
+                        
             $addToSet: {likedMovies: movieId},//addToSet to array only once.
          
             // likedMovies: req.body.likedMovies = [req.params.id]

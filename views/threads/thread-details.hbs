@@ -7,10 +7,12 @@
 <div class="threadTitleLine">
 <h1>{{threadProper.title}}</h1> 
 {{#if canRemoveThread}}
+<br>
+
 
 <span><form class="threadDelBtn" action="/thread/{{threadProper._id}}/delete" method="post">
     <button class="gamefaq-btn">DELETE THREAD</button></form></span>
-
+<br>
 {{/if}}
 </div>
 
@@ -26,7 +28,7 @@
 
 <div class = "comments">
 <div class="commentsHeader">
-<div class ="commentPoster">USERNAME{{posterId.username}} COMMENT POSTER ID{{posterId._id}}  </div>
+<div class ="commentPoster">{{posterId.username}} </div>
 
 
 </div>

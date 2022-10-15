@@ -1,27 +1,27 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  color: #ecffff;
-  background-color: rgba(21, 21, 21, 0.549);
-  margin-top: 50px;
+  color: #c4e5fb;
+  background-color: rgba(15, 14, 14, 0.781);
+  margin-top: -50px;
 }
 
 nav {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   padding: 20px 190px 18px;
-  width: 90%;
-  position: fixed; 
+  width: 100%; 
   top: 0;
   align-items: center;
 }
 
 a {
-  color: #121212;
+  color: #bebebe;
+  padding: 15px;
 }
 
 a:hover {
-  color: whitesmoke;
+  color: white;
 }
 
 .error {
@@ -92,3 +92,17 @@ a:hover {
   box-shadow: none;
 }
 
+#label-changePass{
+  display: inline-block;
+  width: 12em;
+  margin-right: .5em;
+  padding-top: 1.5em;
+  justify-content: center;
+}
+
+#input-changePass{
+  display: inline-block;
+  width: 12em;
+  position: relative;
+  top: -3em;
+}
