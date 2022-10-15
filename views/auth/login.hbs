@@ -1,5 +1,6 @@
 <div id="form">
   <h2>Login</h2>
+  <br>
  
   <form action="/login" method="POST">
  
@@ -10,8 +11,9 @@
     <label>Password
       <input type="password" name="password" placeholder="********" />
     </label>
- 
-    <button class="gamefaq-btn" type="submit">Login</button>
+  <br>
+  <br>
+    <button class="gamefaq-img-btn" type="submit">Login <img id="myDeleteButton" src="../images/login.png" alt=""> </button>
  
     {{#if errorMessage}}
       <p class="error">{{errorMessage}}</p>

@@ -1,6 +1,6 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
   color: #c4e5fb;
   background-color: rgba(15, 14, 14, 0.781);
   margin-top: -50px;
@@ -37,6 +37,7 @@ a:hover {
   height: 200px;
   background-color: rgb(174, 173, 173);
   border:1px solid black;
+  color: black;
 }
 
 .commentsHeader {
@@ -105,4 +106,52 @@ a:hover {
   width: 12em;
   position: relative;
   top: -3em;
+}
+
+
+.gamefaq-img-btn { 
+  background-color: #FFFFFF;
+  border: 0;
+  border-radius: .5rem;
+  box-sizing: border-box;
+  color: #111827;
+  font-family: "Inter var",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: .875rem;
+  font-weight: 600;
+  line-height: 0;
+  padding: .3rem .75rem;
+  text-align: center;
+  text-decoration: none #D1D5DB solid;
+  text-decoration-thickness: auto;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.gamefaq-img-btn:hover {
+  background-color: rgb(249,250,251);
+}
+
+.gamefaq-img-btn:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.gamefaq-img-btn:focus-visible {
+  box-shadow: none;
+}
+
+#myLogoutButton{
+  height: 18px;
+  width: 20px;
+}
+
+#myDeleteButton {
+  display: inline-flex;
+  height: 18px;
+  width: 20px;
+  align-items: center;
+  padding-bottom: 1px;
 }

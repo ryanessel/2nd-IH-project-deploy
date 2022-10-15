@@ -11,7 +11,7 @@
 
 
 <span><form class="threadDelBtn" action="/thread/{{threadProper._id}}/delete" method="post">
-    <button class="gamefaq-btn">DELETE THREAD</button></form></span>
+    <button class="gamefaq-img-btn">DELETE THREAD <img id="myDeleteButton" src="../images/delete.png" alt=""> </button></form></span>
 <br>
 {{/if}}
 </div>
@@ -41,7 +41,7 @@
 {{#if canUserModify}}
   <div> <a href="/comment/{{_id}}/edit">EDIT COMMENT</a></div>
 <form action="/comment/{{_id}}/delete" method="post">
-    <button class="gamefaq-btn">DELETE COMMENT</button>
+    <button class="gamefaq-img-btn">DELETE COMMENT<img id="myDeleteButton" src="../images/delete.png" alt=""></button>
      {{#if threadId}}
   <input style="display: none" type="text" name="threadId" value="{{threadProper}}" />
  {{/if}}
@@ -76,11 +76,11 @@
 {{!-- <button class ="editCommentBtn"> EDIT COMMENT</button> --}}
 {{!-- if   Current user in session === Poster Id then avlaiable. --}}
 {{#if canUserModify}}
-  <button class="gamefaq-btn" onclick="window.location.href='/comment/{{_id}}/edit?threadId={{../threadProper._id}}';" >EDIT COMMENT</button>
+  <button class="gamefaq-img-btn" onclick="window.location.href='/comment/{{_id}}/edit?threadId={{../threadProper._id}}';" >EDIT COMMENT <img id="myLogoutButton" src="../images/edit.png" alt=""> </button>
   <br>
   <br>
 <form action="/comment/{{_id}}/delete" method="post">
-    <button class="gamefaq-btn">DELETE COMMENT</button>
+    <button class="gamefaq-img-btn">DELETE COMMENT<img id="myDeleteButton" src="../images/delete.png" alt=""></button>
      {{#if threadId}}
   <input style="display: none" type="text" name="threadId" value="{{threadProper}}" />
  {{/if}}
@@ -104,7 +104,7 @@
 
 
 <form action="/threads/{{threadProper._id}}" method="post">
-    <button class="gamefaq-btn">Post</button>
+    <button class="gamefaq-img-btn">Post <img id="myLogoutButton" src="../images/post.png" alt=""> </button>
     <div>
     <br>
     {{!-- <input class ="commentBox" type="text" name="text"> --}}

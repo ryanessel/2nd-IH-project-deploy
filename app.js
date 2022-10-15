@@ -29,6 +29,7 @@ app.use((req, res, next) => {
     res.locals.currentUser = req.session.currentUser;
     next();
 });
+
 // 👇 Start handling routes here
 
 //--------- this can be whaterver. its when you call the local host -- this is about 
