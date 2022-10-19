@@ -1,18 +1,11 @@
-<h1>
-  thread ID : {{threadProper.oPiD}}
-</h1>
-<h1>
-     USER IN SESSION: {{currentUser._id}}
-</h1>
+
 <div class="threadTitleLine">
 <h1>{{threadProper.title}}</h1> 
 {{#if canRemoveThread}}
-<br>
-
 
 <span><form class="threadDelBtn" action="/thread/{{threadProper._id}}/delete" method="post">
-    <button class="gamefaq-img-btn">DELETE THREAD <img id="myDeleteButton" src="../images/delete.png" alt=""> </button></form></span>
-<br>
+  <button class="gamefaq-img-btn">DELETE THREAD <img id="myDeleteButton" src="../images/delete.png" alt=""> </button></form></span>
+
 {{/if}}
 </div>
 
@@ -28,7 +21,7 @@
 
 <div class = "comments">
 <div class="commentsHeader">
-<div class ="commentPoster">{{posterId.username}} </div>
+<div class ="commentPoster">{{posterId.username}} | {{age}} minutes ago</div>
 
 
 </div>
@@ -57,14 +50,18 @@
 {{/each}}
 {{/unless}}
 
+{{!-- //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+//※※※※※※※※※※※※※※※※※LOGGED IN SECTION BELOW※※※※※※※※※※※※※※※※※※※※※※※※※
+
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- --}}
 {{#if currentUser}}
-{{#each comments.threadComments}}
+{{#each comments}}
 <h2>{{comments.[0].posterId.username}}</h2>
-
+{{!-- {{this}} --}}
 <div class = "comments">
 <div class="commentsHeader">
-<div class ="commentPoster">USERNAME{{posterId.username}} COMMENT POSTER ID{{posterId._id}}  </div>
+<div class ="commentPoster">{{posterId.username}} | {{age}} minutes ago</div>
 
 
 </div>
@@ -96,20 +93,18 @@
 <br>
 {{/each}}
 {{/if}}
-<div>
-   BIG TEST {{threadProper._id}}
-  
-</div>
+
 <br>
 
-
 <form action="/threads/{{threadProper._id}}" method="post">
-    <button class="gamefaq-img-btn">Post <img id="myLogoutButton" src="../images/post.png" alt=""> </button>
+
     <div>
-    <br>
+    
     {{!-- <input class ="commentBox" type="text" name="text"> --}}
     <textarea data-name="com"  placeholder="Comment" class="commentBox" name="text" autocomplete="off"></textarea>
     </div>
+    <br>
+    <button class="gamefaq-img-btn">Post <img id="myLogoutButton" src="../images/post.png" alt=""> </button>
 
 </form>
 

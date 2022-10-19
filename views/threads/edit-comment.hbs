@@ -1,7 +1,8 @@
-<h1>COMMENT COLLECTION TEST</h1>
-<h1>HERE: {{comment}}</h1>
-
-<h2>EDIT COMMENT</h2>
+{{!-- <h1>COMMENT COLLECTION TEST</h1>
+<h1>HERE: {{comment}}</h1> --}}
+<br><br>
+<h3>EDIT COMMENT</h3>
+<br>
 {{!-- {{_id}} --}}
 {{!-- the action portion of the form is what determines the route that you will be calling when you submit the form --}}
 <form action="/comment/{{comment._id}}/edit" method="post">
@@ -9,9 +10,6 @@
 
 
     <label for="editingComment">
-      COMMENT:
-
-     
          <textarea  id="editingComment"   class="commentBox" name="text"  value="{{comment.text}}">{{comment.text}}</textarea>
     </label>
 
@@ -19,6 +17,6 @@
  {{#if threadId}}
   <input style="display: none" type="text" name="threadId" value="{{threadId}}" />
  {{/if}}
-
+<br><br>
     <button class="gamefaq-img-btn">Update <img id="myLogoutButton" src="../update.png" alt=""> </button>
 </form>

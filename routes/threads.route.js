@@ -116,29 +116,55 @@ router.get(`/threads/create`, isLoggedIn, (req, res) =>{
                    
 
             console.log({LOGGEDIN: theThread.oPiD})
-            const updatedThreads = [...theThread.threadComments].map(comments => {
-                // console.log({thread: comments._doc, user: req.session.currentUser, match: String(comments._doc.posterId._id) === String(req.session.currentUser._id)});
-                console.log({THREADID:String(theThread.oPiD), CURRENTUSER:String(req.session.currentUser._id)})
+            // const updatedThreads = [...theThread.threadComments].map(comments => {
+            //     // console.log({thread: comments._doc, user: req.session.currentUser, match: String(comments._doc.posterId._id) === String(req.session.currentUser._id)});
+            //     console.log({THREADID:String(theThread.oPiD), CURRENTUSER:String(req.session.currentUser._id)})
 
-                return {
-                    ...comments._doc,
-                    canUserModify:!!req.session.currentUser && String(comments._doc.posterId._id) === String(req.session.currentUser._id)
+            //     return {
+            //         ...comments._doc,
+            //         canUserModify:!!req.session.currentUser && String(comments._doc.posterId._id) === String(req.session.currentUser._id)
                    
+            //     }
+
+
+
+            // });
+           
+           
+           let updateComments = theThread.threadComments.map((eachComment)=> {
+
+                // full expression (Math.abs(new Date() - eachComment.createdAt))
+                const now = new Date();
+                const commentAge = Math.abs(now - eachComment.createdAt)
+                const properCommentAge = Math.round((commentAge / 1000) /60)
+
+                eachComment.age = Math.round((commentAge / 1000) /60)
+
+                if (req.session.currentUser && String(eachComment.posterId._id) === String(req.session.currentUser._id)){
+
+                    eachComment.canUserModify = true
+
+                } else {
+                    eachComment.canUserModify = false
+
                 }
 
 
+                return eachComment
+                console.log(eachComment)
+            }
 
-            });
-           
-            
-
-
-            res.render('threads/thread-details', {
-                        comments:{
-                            ...theThread,
-                            threadComments: updatedThreads
-                        }, threadProper:theThread,  canRemoveThread: !!req.session.currentUser && String(theThread.oPiD) === String(req.session.currentUser._id) }
             )
+           
+            res.render('threads/thread-details', 
+            {              threadProper:theThread,
+                            comments: updateComments,
+                canRemoveThread: !!req.session.currentUser && String(theThread.oPiD) === String(req.session.currentUser._id)}
+         
+                        )
+     
+
+           
         }
         })
         .catch((err)=>{
@@ -146,7 +172,7 @@ router.get(`/threads/create`, isLoggedIn, (req, res) =>{
         })
     })
 
-
+//MAKING COMMENTS
     router.post('/threads/:id', isLoggedIn, (req, res, next) => {
         console.log({THREADREQ: req.params.id})
         const {title, text} = req.body;
@@ -154,7 +180,7 @@ router.get(`/threads/create`, isLoggedIn, (req, res) =>{
         .then(postComment => {
     
             console.log({Comment: postComment})
-
+           
             
         Thread.findByIdAndUpdate(req.params.id, {
             
@@ -251,11 +277,19 @@ router.get(`/threads/create`, isLoggedIn, (req, res) =>{
 // TRYING TO SEND LIEKD MOVIED ID's TO CURRENT SESSION UESER likedMovie ARRAY
     router.post(`/like/:id`, isLoggedIn, (req, res, next) => {
 
+       
+
+
+
       let movieId = req.params.id
+
+  
+
       
     // CAN ADJUST THIS LATER> THIS IS JUST FOR LIKES. DOESN"T MATTER THAT MUCH IN OUR CASE.  
         User.findByIdAndUpdate(req.session.currentUser._id, {
-                        
+            
+            
             $addToSet: {likedMovies: movieId},//addToSet to array only once.
          
             // likedMovies: req.body.likedMovies = [req.params.id]
