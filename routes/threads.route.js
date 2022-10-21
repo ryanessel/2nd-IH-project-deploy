@@ -138,7 +138,42 @@ router.get(`/threads/create`, isLoggedIn, (req, res) =>{
                 const commentAge = Math.abs(now - eachComment.createdAt)
                 const properCommentAge = Math.round((commentAge / 1000) /60)
 
-                eachComment.age = Math.round((commentAge / 1000) /60)
+              
+
+
+            eachComment.clockMins = 0
+            eachComment.clockHours = 0
+            eachComment.clockDays = 0
+
+
+                eachComment.minutes = Math.round((commentAge / 1000) /60)
+                // calculating hours
+            if (eachComment.minutes >= 60 ) {
+                eachComment.hours = Math.round(eachComment.minutes/60)
+            }
+
+            //setting up clock to count minutes but zero out at 60
+             if (eachComment.clockMins > 59   ){
+                eachComment.clockMins = 0;
+             }   else if(!eachComment.minutes % 60 === 0) {
+                eachComment.clockMins = eachComment.minutes % 60
+             }
+                
+
+             if (eachComment.clockHours > 23   ){
+                eachComment.clockHours = 0;
+             }   else if(!eachComment.hours % 24 === 0) {
+                eachComment.clockHours = eachComment.hours % 24
+             }
+
+
+           
+                //calculating days
+            if (eachComment.hours >= 24) {
+
+                eachComment.days = Math.round(eachComment.hours/24)
+            }
+
 
                 if (req.session.currentUser && String(eachComment.posterId._id) === String(req.session.currentUser._id)){
 
@@ -149,22 +184,23 @@ router.get(`/threads/create`, isLoggedIn, (req, res) =>{
 
                 }
 
-
+         
                 return eachComment
                 console.log(eachComment)
             }
-
+    
             )
-           
+          
             res.render('threads/thread-details', 
             {              threadProper:theThread,
                             comments: updateComments,
-                canRemoveThread: !!req.session.currentUser && String(theThread.oPiD) === String(req.session.currentUser._id)}
+                canRemoveThread: !!req.session.currentUser && String(theThread.oPiD) === String(req.session.currentUser._id),
+                hideMins: !!updateComments.minutes >= 60
+                }
+                
          
                         )
-     
-
-           
+    
         }
         })
         .catch((err)=>{
@@ -207,6 +243,8 @@ router.get(`/threads/create`, isLoggedIn, (req, res) =>{
     
     router.post('/thread/:id/delete', (req, res, next)=>{
 
+     console.log(req.params.id)
+        
         Thread.findByIdAndRemove(req.params.id)
         .then((response)=>{
             console.log({THEPOSTRESPONSE:response})
@@ -220,94 +258,7 @@ router.get(`/threads/create`, isLoggedIn, (req, res) =>{
     
     });
 
-//DELETE COMMENT
 
-
-
-
-
-
-
-
-
-    
-
-    // router.get(`/movies/:id/edit`, (req, res, next) => {
-    //     Movie.findById(req.params.id)
-    //     .then(() => {
-
-    //     })
-
-    //     Celeb.find()
-    //     .then((celebFromDb) => {
-    //         res.render(`movies/edit-movie`, {celebs: celebFromDb})
-    //     })
-    //     .catch(err => {
-    //         console.log(err)
-    //     })
-
-
-    // })
-
-
-
-    router.post('/movies/:id', (req, res, next)=>{
-
-        Thread.findByIdAndUpdate( req.params.id, {
-            title: req.body.title,
-            genre: req.body.genre,
-            plot: req.body.plot,
-            cast: req.body.cast
-           
-
-        })
-        
-        
-        
-        .then((response)=>{
-    
-            res.redirect(`/movies/${req.params.id}`);
-    
-        }).catch((err)=>{
-            console.log(err);
-        })
-    
-    
-    })
-// TRYING TO SEND LIEKD MOVIED ID's TO CURRENT SESSION UESER likedMovie ARRAY
-    router.post(`/like/:id`, isLoggedIn, (req, res, next) => {
-
-       
-
-
-
-      let movieId = req.params.id
-
-  
-
-      
-    // CAN ADJUST THIS LATER> THIS IS JUST FOR LIKES. DOESN"T MATTER THAT MUCH IN OUR CASE.  
-        User.findByIdAndUpdate(req.session.currentUser._id, {
-            
-            
-            $addToSet: {likedMovies: movieId},//addToSet to array only once.
-         
-            // likedMovies: req.body.likedMovies = [req.params.id]
-        })
-        .then(response => {
-            console.log(response)
-            console.log(response.likedMovies)
-        })
-        // .then(user => {
-        //     user.likedMovies = user.likedMovies.push(movieId)
-        //     console.log(user.likedMovies.length)
-        //     console.log(user)
-        // })
-       
-
-        console.log({注意likedMovie: req.params.id})// clicking like gives movie id (needs to be passed to the User.moviesliked array)
-        res.redirect(`/movies`)
-    })
   
 
   module.exports = router;

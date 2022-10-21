@@ -1,14 +1,10 @@
-{{!-- <h1>COMMENT COLLECTION TEST</h1>
-<h1>HERE: {{comment}}</h1> --}}
+
 <br><br>
 <h3>EDIT COMMENT</h3>
 <br>
-{{!-- {{_id}} --}}
-{{!-- the action portion of the form is what determines the route that you will be calling when you submit the form --}}
+
 <form action="/comment/{{comment._id}}/edit" method="post">
- {{!-- the method of the form is what determines the request type that is being made (get/post) --}}
-
-
+ 
     <label for="editingComment">
          <textarea  id="editingComment"   class="commentBox" name="text"  value="{{comment.text}}">{{comment.text}}</textarea>
     </label>

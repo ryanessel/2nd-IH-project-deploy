@@ -1,11 +1,7 @@
 <h2>New Thread</h2>
 <br>
-{{!-- {{movies._id}} --}}
 
-{{!-- the action portion of the form is what determines the route that you will be calling when you submit the form --}}
 <form action="/threads/create" method="post">
- {{!-- the method of the form is what determines the request type that is being made (get/post) --}}
-
 
     <label for="threadTitleInput">
        <div>Title:</div> 
@@ -18,11 +14,8 @@
     </label>
 </div>
 
-
-
-
     <br>
     <button class="gamefaq-img-btn">Post <img id="myLogoutButton" src="../images/post.png" alt=""> </button>
-    {{!-- buttons in forms will auto sync to the form and when clicked will submit the data from the form using the endpoint (action) and the method (method) that is defined in the form parameters at the top --}}
+    
 </form>
 

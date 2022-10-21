@@ -3,16 +3,24 @@
 <h1>{{threadProper.title}}</h1> 
 {{#if canRemoveThread}}
 
-<span><form class="threadDelBtn" action="/thread/{{threadProper._id}}/delete" method="post">
-  <button class="gamefaq-img-btn">DELETE THREAD <img id="myDeleteButton" src="../images/delete.png" alt=""> </button></form></span>
+
+  <span><form id="form-id{{_id}}" class="deletetingBtn" action="/thread/{{threadProper._id}}/delete" method="post">
+<div onclick="
+if(confirm(`Are you sure you want to delete this thread?`)){
+
+document.getElementById(`form-id{{_id}}`).submit();
+
+} else {
+  return
+}
+"><button type="button" class="gamefaq-img-btn">DELETE THREAD<img id="myDeleteButton" src="../images/delete.png" alt=""></button></div>
+    {{#if threadId}}
+  <input style="display: none" type="text" name="threadId" value="{{threadProper}}" />
+ {{/if}}
+</form></span>
 
 {{/if}}
 </div>
-
-
-{{!-- <h2>threadComments Check {{thread.threadComments}}</h2>
-<h2>{{comments}}</h2> --}}
-
 
 
 {{#unless currentUser}}
@@ -29,10 +37,11 @@
 
 </div>
 <div class ="commentBtns">
-{{!-- <button class ="editCommentBtn"> EDIT COMMENT</button> --}}
-{{!-- if   Current user in session === Poster Id then avlaiable. --}}
+
 {{#if canUserModify}}
   <div> <a href="/comment/{{_id}}/edit">EDIT COMMENT</a></div>
+
+
 <form action="/comment/{{_id}}/delete" method="post">
     <button class="gamefaq-img-btn">DELETE COMMENT<img id="myDeleteButton" src="../images/delete.png" alt=""></button>
      {{#if threadId}}
@@ -45,7 +54,7 @@
 
 {{/if}}
 </div>
-{{!-- /if  --}}
+
 <br>
 {{/each}}
 {{/unless}}
@@ -58,10 +67,10 @@
 {{#if currentUser}}
 {{#each comments}}
 <h2>{{comments.[0].posterId.username}}</h2>
-{{!-- {{this}} --}}
+
 <div class = "comments">
 <div class="commentsHeader">
-<div class ="commentPoster">{{posterId.username}} | {{age}} minutes ago</div>
+<div class ="commentPoster">{{posterId.username}} | Posted {{days}} days {{clockHours}} hours {{clockMins}} mins ago</div>
 
 
 </div>
@@ -70,26 +79,35 @@
 </div>
 <br>
 <div class ="commentBtns">
-{{!-- <button class ="editCommentBtn"> EDIT COMMENT</button> --}}
-{{!-- if   Current user in session === Poster Id then avlaiable. --}}
+
 {{#if canUserModify}}
   <button class="gamefaq-img-btn" onclick="window.location.href='/comment/{{_id}}/edit?threadId={{../threadProper._id}}';" >EDIT COMMENT <img id="myLogoutButton" src="../images/edit.png" alt=""> </button>
   <br>
   <br>
-<form action="/comment/{{_id}}/delete" method="post">
-    <button class="gamefaq-img-btn">DELETE COMMENT<img id="myDeleteButton" src="../images/delete.png" alt=""></button>
-     {{#if threadId}}
+
+
+
+<form id="form-id{{_id}}" class="deletetingBtn" action="/comment/{{_id}}/delete" method="post">
+<div onclick="
+if(confirm(`Are you sure you want to delete this comment?`)){
+
+document.getElementById(`form-id{{_id}}`).submit();
+
+} else {
+  return
+}
+"><button type="button" class="gamefaq-img-btn">DELETE COMMENT<img id="myDeleteButton" src="../images/delete.png" alt=""></button></div>
+    {{#if threadId}}
   <input style="display: none" type="text" name="threadId" value="{{threadProper}}" />
  {{/if}}
 </form>
-
 
 {{else}}
 
 
 {{/if}}
 </div>
-{{!-- /if  --}}
+
 <br>
 {{/each}}
 {{/if}}
@@ -100,7 +118,6 @@
 
     <div>
     
-    {{!-- <input class ="commentBox" type="text" name="text"> --}}
     <textarea data-name="com"  placeholder="Comment" class="commentBox" name="text" autocomplete="off"></textarea>
     </div>
     <br>
