@@ -172,6 +172,8 @@ router.get(`/threads/create`, isLoggedIn, (req, res) =>{
             if (eachComment.hours >= 24) {
 
                 eachComment.days = Math.round(eachComment.hours/24)
+            } else {
+                eachComment.days = 0;
             }
 
 
