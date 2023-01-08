@@ -52,10 +52,11 @@ router.post(`/signup`, isLoggedOut, (req, res, next )=>{
         })
         .then(userFromDb => { // userFromDb is the result of the .Create fucntion?
         //    console.log(`New User CREATED: `, userFromDb) checking if we got it in the database here. (WE GOT IT)
+        console.log("new user test", userFromDb)
           res.redirect(`/userProfile`)
 
         })
-
+        .catch((err) => {"SIGN UP ERROR:", err})
 
 
 })
