@@ -15,11 +15,12 @@ const Thread = require('../models/Thread.model');
 //START-SIGNUP ROUTES
 
 router.get(`/signup`, isLoggedOut, (req, res, next) => {// remeber you need a "/" in the route for the local host!
+  console.log("LOGIN PAGE LOADED")
     res.render(`auth/signup`)
 })
 
 router.post(`/signup`, isLoggedOut, (req, res, next )=>{
-    // console.log(req.body) getting the right responses 
+    // console.log("SIGN UP POST ROUTE CHECK", req.body) //getting the right responses 
     const { username, email, password } = req.body;
 
     if(!username || !email || !password) {
